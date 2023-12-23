@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate Average</title>
+</head>
+<body>
+
+    <input id="num" type="text" value="" placeholder="enter numbers">
+    <p id="result"></p>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var inputElement = document.getElementById('num');
+            var resultElement = document.getElementById('result');
+
+            // Додаємо обробник події для втрати фокусу
+            inputElement.addEventListener('blur', function () {
+                // Отримуємо значення з елемента введення
+                var inputValues = inputElement.value;
+
+                // Розбиваємо значення на масив чисел
+                var numbers = inputValues.split(',').map(function (num) {
+                    return parseFloat(num.trim());
+                });
+
+                // Обчислюємо середнє арифметичне
+                var average = calculateAverage(numbers);
+
+                // Виводимо результат у елемент <p>
+                resultElement.textContent = "Average: " + (isNaN(average) ? "Invalid input" : average);
+            });
+
+            // Функція для обчислення середнього арифметичного
+            function calculateAverage(numbers) {
+                if (numbers.length === 0) {
+                    return NaN; // Повертає NaN, якщо масив порожній
+                }
+                var sum = numbers.reduce(function (acc, num) {
+                    return acc + num;
+                }, 0);
+                return sum / numbers.length;
+            }
+        });
+    </script>
+
+</body>
+</html>
